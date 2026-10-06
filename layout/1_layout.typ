@@ -46,7 +46,7 @@
             } else {
               counter(page).final().at(0)
             }
-            [Page #current / #total]
+            [#langue.page #current / #total]
           },
         )
       ]
@@ -54,7 +54,7 @@
   )
   set text(size: 11pt)
   set par(justify: true, leading: 0.65em, spacing: 1.2em)
-  show figure.where(kind: image): set figure(supplement: "Figure")
+  show figure.where(kind: image): set figure(supplement: langue.figure)
 
   // NUMÉROTATION ET TITRES
   set heading(numbering: "1.1.1")

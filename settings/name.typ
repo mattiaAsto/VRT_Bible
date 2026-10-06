@@ -15,7 +15,7 @@
   titre-image: "titre",
   
   numbering: false,
-  page_garde: true, // si false alors pas  de page de garde, pas de table des matières, pas d'annexe 
+  page_garde: true, // si false : pas de page de garde et pas de table des matières 
 
   langue: "fr",// mettre soit  "de" soit en soit "en"
 )
@@ -31,12 +31,12 @@
     signature: "signature_wailliez.png",
   ),
   (
-    active: false,
+    active: true,
     prenom: "Deuxième",
     nom: "Auteur",
     abreviation: "D.A",
     email: "exemple@hes-so.ch",
-    signature: "signature.png",
+    signature: "",
   ),
   // possibilé de rajouter plusieurs élèves
 )
@@ -70,6 +70,9 @@
     table-matiere: "Table des matières",
     table-biblio: "Bibliographie",
     table-gloss: "Glossaire",
+    table-acronymes: "Table des acronymes",
+    table-abreviations: "Table des abréviations",
+    figure: "Figure",
     table-annexes: "Table des annexes",
     table-figure: "Table des illustrations",
     table-table: "Table des tableaux",
@@ -78,8 +81,8 @@
   )
 } else if config.langue == "en" {
   (
-    auteur: "Autor",
-    auteur-pl: "Autoren",
+    auteur: "Author",
+    auteur-pl: "Authors",
     professeur: "Professor",
     professeur-pl: "Professors",
     cours: "Course",
@@ -91,6 +94,9 @@
     table-matiere: "Table of Contents",
     table-biblio: "Bibliography",
     table-gloss: "Glossary",
+    table-acronymes: "List of Acronyms",
+    table-abreviations: "List of Abbreviations",
+    figure: "Figure",
     table-annexes: "List of Appendices",
     table-figure: "List of Figures",
     table-table: "List of Tables",
@@ -112,6 +118,9 @@
     table-matiere: "Inhaltsverzeichnis",
     table-biblio: "Literaturverzeichnis",
     table-gloss: "Glossar",
+    table-acronymes: "Akronymverzeichnis",
+    table-abreviations: "Abkürzungsverzeichnis",
+    figure: "Abbildung",
     table-annexes: "Anhangsverzeichnis",
     table-figure: "Abbildungsverzeichnis",
     table-table: "Tabellenverzeichnis",
@@ -133,6 +142,9 @@
     table-matiere: "-",
     table-biblio: "-",
     table-gloss: "-",
+    table-acronymes: "-",
+    table-abreviations: "-",
+    figure: "-",
     table-annexes: "-",
     table-figure: "-",
     table-table: "-",

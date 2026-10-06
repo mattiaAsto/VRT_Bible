@@ -28,7 +28,16 @@
     for author in auteurs {
       if author.active {
         sigs.push([
-          #box(height: 3cm, align(bottom + center, image("../assets/picture/" + author.signature, width: 3.5cm)))
+          #box(height: 3cm, align(bottom + center, 
+          if(author.signature == ""){
+            image("../assets/picture/picture_template/signature.png",width: 3.5cm)
+            
+          }else{
+            image("../assets/picture/" + author.signature, width: 3.5cm)
+            
+          }
+          ))
+           
           #v(1em)
           #author.prenom #author.nom \
           #text(fill: black, link("mailto:" + author.email, author.email))

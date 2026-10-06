@@ -1,5 +1,11 @@
 #import "layout/0_lib.typ": *
-#show: rapport-brouillon()
+
+// Annexes : déclarées ici, mais affichées SEULEMENT si elles sont citées dans le texte
+// (ex : @ann:reference1). Même principe que les acronymes.
+#show: rapport-brouillon(annexes-contenu: [
+  #pdf("exemple.pdf", "Exemple 1", debut: 2, fin: 3, etiquette: <ann:reference1>)
+  #pdf("exemple.pdf", "Exemple 2", debut: 1, fin: 1, etiquette: <ann:reference2>)
+])
 
 
 
@@ -17,7 +23,7 @@
 
   == Méthodologie
 
-  Nous avons utilisé une approche expérimentale combinée à une @rust pour validation théorique.
+  Nous avons utilisé une approche expérimentale, réalisée à la @hei dans le cadre de la @hesso, combinée à une simulation pour validation théorique.
 
   // 2. BOÎTES UTILITAIRES
 
@@ -69,7 +75,7 @@
     caption: [Mesures de l'inductance de la bobine en fonction de la fréquence],
   )
 
-  Ce rapport utilise notamment @hei et @rust.
+  La fréquence de coupure vaut @ca 1 kHz.
 
   #pagebreak()
   == Graphiques
@@ -184,22 +190,24 @@ def verifier_moteur():
     - Rédiger la conclusion
   ]
 
-  // 4. GLOSSAIRE
+  // 4. ACRONYMES, ABRÉVIATIONS ET ANNEXES
 
   #pagebreak()
-  = Glossaire
+  = Acronymes et abréviations
 
-  Le glossaire contient les définitions des termes techniques utilisés dans ce rapport.
+  Les acronymes se déclarent dans *settings/acronymes.typ* et les abréviations dans *settings/abreviations.typ*. Il suffit ensuite d'écrire leur clé dans le texte, par exemple @pwm : à la première citation la forme longue est affichée avec la forme courte entre parenthèses, ensuite seule la forme courte apparaît (la @hei, par exemple).
 
-  *Termes utilisés :*
+  Chaque table est créée automatiquement à la fin du document, mais *uniquement si au moins une de ses entrées est citée*. Sans acronyme cité, la « Table des acronymes » n'existe pas ; sans abréviation citée, la « Table des abréviations » n'existe pas. Pour plus de détails, @cf la section « Bibliographie » ci-dessous.
 
-  Ce rapport utilise notamment @hei et @rust.
+  = Annexes
 
-  Pour plus de détails, consultez la section "Glossaire" à la fin du document.
+  Les annexes se déclarent avec `#pdf(...)` (voir le haut de ce fichier) en leur donnant une étiquette. *Une annexe n'est affichée que si elle est citée dans le texte*, comme un acronyme : l'annexe @ann:reference1 est citée ici, elle apparaît donc après la bibliographie. L'annexe `ann:reference2` n'est citée nulle part : elle est ignorée. Pour l'afficher, il suffit d'écrire sa référence dans le texte.
+
+  Si aucune annexe n'est citée, ni la page « Annexes » ni la « Table des annexes » ne sont créées. Les lettres (A, B, C...) ne sont attribuées qu'aux annexes affichées.
 
   = Bibliographie
 
-  La bibliographie permet d'inclure une référence @Aut1 à un auteur spécifique ou même à un livre. Il faut regarder : *src/settings/refs.bib*
+  La bibliographie permet d'inclure une référence @Aut1 à un auteur spécifique ou même à un livre. Il faut regarder : *settings/refs.bib*
   L'auteur est ensuite affiché en fond de document avec la description incluse.
 
   // 5. CONCLUSION
@@ -209,16 +217,17 @@ def verifier_moteur():
 
   Ce rapport a démontré l'utilisation complète du modèle HES-SO pour Typst, incluant :
 
-  ✅ Mise en page professionnelle et automatisée
-  ✅ Boîtes utilitaires colorées et personnalisables
-  ✅ Tableaux et figures avec légendes
-  ✅ Code source numéroté
-  ✅ Équations numérotées avec références
-  ✅ Glossaire avec acronymes
-  ✅ Gestion complète des auteurs et professeurs
+  ✅ Mise en page professionnelle et automatisée \
+  ✅ Boîtes utilitaires colorées et personnalisables \
+  ✅ Tableaux et figures avec légendes \
+  ✅ Code source numéroté \
+  ✅ Équations numérotées avec références \
+  ✅ Tables d'acronymes et d'abréviations (affichées seulement si utilisées) \
+  ✅ Annexes affichées seulement si elles sont citées \
+  ✅ Gestion complète des auteurs et professeurs \
   ✅ Pages de signature automatiques
 
-  Le modèle est entièrement personnalisable via le fichier `src/settings/name.typ`.
+  Le modèle est entièrement personnalisable via le fichier `settings/name.typ`.
 
 ] else if config.langue == "en" [
 
@@ -233,7 +242,7 @@ def verifier_moteur():
 
   == Methodology
 
-  We used an experimental approach combined with a @rust for theoretical validation.
+  We used an experimental approach, carried out at @hei as part of @hesso, combined with a simulation for theoretical validation.
 
   // 2. UTILITY BOXES
 
@@ -285,7 +294,7 @@ def verifier_moteur():
     caption: [Coil inductance measurements as a function of frequency],
   )
 
-  This report uses @hei and @rust in particular.
+  The cutoff frequency is @ca 1 kHz.
 
   #pagebreak()
   == Charts
@@ -358,7 +367,7 @@ def verifier_moteur():
 
   *Control + C Control V* or by importing only lines of code
 
-  #code([Code Phyton], ```python
+  #code([Python code], ```python
 def verifier_moteur():
     vitesse = 100
     if vitesse > 50:
@@ -367,9 +376,9 @@ def verifier_moteur():
 ```
 )<code:code_c_>
 
-#code-fichier("/assets/code/exemple.py", [File Phyton], debut: 7, fin: 11, lang: "python")<fig:mon_code>
+#code-fichier("/assets/code/exemple.py", [Python file excerpt], debut: 7, fin: 11, lang: "python")<fig:mon_code>
 
-#code-fichier("/assets/code/exemple.py", [File Phyton], debut:1 , fin: 11, lang: "python")<fig:mon_code1>
+#code-fichier("/assets/code/exemple.py", [Python file excerpt], debut:1 , fin: 11, lang: "python")<fig:mon_code1>
 
   #pagebreak()
   = Examples of utility boxes & highlighter
@@ -400,22 +409,24 @@ def verifier_moteur():
     - Write the conclusion
   ]
 
-  // 4. GLOSSARY
+  // 4. ACRONYMS, ABBREVIATIONS AND APPENDICES
 
   #pagebreak()
-  = Glossary
+  = Acronyms and abbreviations
 
-  The glossary contains the definitions of the technical terms used in this report.
+  Acronyms are declared in *settings/acronymes.typ* and abbreviations in *settings/abreviations.typ*. Then just write their key in the text, for example @pwm: on first use the long form is displayed with the short form in brackets, afterwards only the short form appears (@hei, for example).
 
-  *Terms used:*
+  Each list is created automatically at the end of the document, but *only if at least one of its entries is cited*. With no acronym cited, the "List of Acronyms" does not exist; with no abbreviation cited, the "List of Abbreviations" does not exist. For more details, @cf the "Bibliography" section below.
 
-  This report uses @hei and @rust in particular.
+  = Appendices
 
-  For more details, see the "Glossary" section at the end of the document.
+  Appendices are declared with `#pdf(...)` (see the top of this file) and given a label. *An appendix is only displayed if it is cited in the text*, just like an acronym: appendix @ann:reference1 is cited here, so it appears after the bibliography. Appendix `ann:reference2` is cited nowhere: it is ignored. To display it, simply write its reference in the text.
+
+  If no appendix is cited, neither the "Appendices" page nor the "List of Appendices" is created. Letters (A, B, C...) are only given to displayed appendices.
 
   = Bibliography
 
-  The bibliography allows you to include a reference @Aut1 to a specific author or even a book. You should look at: *src/settings/refs.bib*
+  The bibliography allows you to include a reference @Aut1 to a specific author or even a book. You should look at: *settings/refs.bib*
   The author is then displayed at the end of the document with the included descriptions.
 
   // 5. CONCLUSION
@@ -425,16 +436,17 @@ def verifier_moteur():
 
   This report has demonstrated the complete use of the HES-SO template for Typst, including:
 
-  ✅ Professional and automated layout
-  ✅ Colorful and customizable utility boxes
-  ✅ Tables and figures with captions
-  ✅ Numbered source code
-  ✅ Numbered equations with references
-  ✅ Glossary with acronyms
-  ✅ Complete management of authors and professors
+  ✅ Professional and automated layout \
+  ✅ Colorful and customizable utility boxes \
+  ✅ Tables and figures with captions \
+  ✅ Numbered source code \
+  ✅ Numbered equations with references \
+  ✅ Lists of acronyms and abbreviations (only shown if used) \
+  ✅ Appendices only shown if cited \
+  ✅ Complete management of authors and professors \
   ✅ Automatic signature pages
 
-  The template is fully customizable via the src/settings/name.typ file.
+  The template is fully customizable via the settings/name.typ file.
 
 ] else if config.langue == "de" [
   //EDITION
@@ -448,7 +460,7 @@ def verifier_moteur():
 
   == Methodik
 
-  Wir haben einen experimentellen Ansatz kombiniert mit einer @rust zur theoretischen Validierung verwendet.
+  Wir haben einen experimentellen Ansatz, durchgeführt an der @hei im Rahmen der @hesso, mit einer Simulation zur theoretischen Validierung kombiniert.
 
   // 2. HILFSBOXEN
 
@@ -500,7 +512,7 @@ def verifier_moteur():
     caption: [Messungen der Spuleninduktivität in Abhängigkeit von der Frequenz],
   )
 
-  Dieser Bericht verwendet insbesondere @hei und @rust.
+  Die Grenzfrequenz beträgt @ca 1 kHz.
 
   #pagebreak()
   == Diagramme
@@ -572,7 +584,7 @@ def verifier_moteur():
   Dieser Abschnitt erklärt, wie man Code direkt importiert, indem man Folgendes tut:
 
   *Strg + C Strg + V* oder indem nur Codezeilen importiert werden
-  #code([Beispile in Phyton], ```python
+  #code([Beispiel in Python], ```python
 def verifier_moteur():
     vitesse = 100
     if vitesse > 50:
@@ -615,22 +627,24 @@ def verifier_moteur():
     - Fazit schreiben
   ]
 
-  // 4. GLOSSAR
+  // 4. AKRONYME, ABKÜRZUNGEN UND ANHÄNGE
 
   #pagebreak()
-  = Glossar
+  = Akronyme und Abkürzungen
 
-  Das Glossar enthält die Definitionen der in diesem Bericht verwendeten Fachbegriffe.
+  Akronyme werden in *settings/acronymes.typ* und Abkürzungen in *settings/abreviations.typ* deklariert. Anschließend genügt es, den Schlüssel im Text zu schreiben, zum Beispiel @pwm: Beim ersten Vorkommen wird die Langform mit der Kurzform in Klammern angezeigt, danach erscheint nur noch die Kurzform (z. B. @hei).
 
-  *Verwendete Begriffe:*
+  Jedes Verzeichnis wird am Ende des Dokuments automatisch erstellt, aber *nur wenn mindestens einer seiner Einträge zitiert wird*. Ohne zitiertes Akronym gibt es kein Akronymverzeichnis, ohne zitierte Abkürzung kein Abkürzungsverzeichnis. Weitere Details: @cf Abschnitt „Literaturverzeichnis“ unten.
 
-  Dieser Bericht verwendet insbesondere @hei und @rust.
+  = Anhänge
 
-  Weitere Details finden Sie im Abschnitt "Glossar" am Ende des Dokuments.
+  Anhänge werden mit `#pdf(...)` deklariert (siehe Anfang dieser Datei) und erhalten ein Etikett. *Ein Anhang wird nur angezeigt, wenn er im Text zitiert wird*, wie ein Akronym: Der Anhang @ann:reference1 wird hier zitiert und erscheint daher nach dem Literaturverzeichnis. Der Anhang `ann:reference2` wird nirgends zitiert und daher ignoriert. Um ihn anzuzeigen, genügt es, seine Referenz im Text zu schreiben.
+
+  Wird kein Anhang zitiert, werden weder die Seite „Anhänge“ noch das „Anhangsverzeichnis“ erstellt. Die Buchstaben (A, B, C...) werden nur an angezeigte Anhänge vergeben.
 
   = Literaturverzeichnis
 
-  Das Literaturverzeichnis ermöglicht es, eine Referenz @Aut1 auf einen bestimmten Autor oder sogar auf ein Buch einzufügen. Sie sollten sich *src/settings/refs.bib* ansehen.
+  Das Literaturverzeichnis ermöglicht es, eine Referenz @Aut1 auf einen bestimmten Autor oder sogar auf ein Buch einzufügen. Sie sollten sich *settings/refs.bib* ansehen.
   Der Autor wird dann am Ende des Dokuments mit den enthaltenen Beschreibungen angezeigt.
 
   // 5. FAZIT
@@ -640,14 +654,15 @@ def verifier_moteur():
 
   Dieser Bericht hat die vollständige Verwendung der HES-SO-Vorlage für Typst demonstriert, einschließlich:
 
-  ✅ Professionelles und automatisiertes Layout
-  ✅ Farbige und anpassbare Hilfsboxen
-  ✅ Tabellen und Abbildungen mit Legenden
-  ✅ Nummerierter Quellcode
-  ✅ Nummerierte Gleichungen mit Referenzen
-  ✅ Glossar mit Akronymen
-  ✅ Vollständige Verwaltung von Autoren und Professoren
+  ✅ Professionelles und automatisiertes Layout \
+  ✅ Farbige und anpassbare Hilfsboxen \
+  ✅ Tabellen und Abbildungen mit Legenden \
+  ✅ Nummerierter Quellcode \
+  ✅ Nummerierte Gleichungen mit Referenzen \
+  ✅ Akronym- und Abkürzungsverzeichnis (nur angezeigt, wenn verwendet) \
+  ✅ Anhänge nur angezeigt, wenn zitiert \
+  ✅ Vollständige Verwaltung von Autoren und Professoren \
   ✅ Automatische Unterschriftenseiten
 
-  Die Vorlage ist vollständig über die Datei `src/settings/name.typ` anpassbar.
+  Die Vorlage ist vollständig über die Datei `settings/name.typ` anpassbar.
 ]
